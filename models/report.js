@@ -9,7 +9,7 @@ const reportSchema = new mongoose.Schema(
     },
     doctor: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Patient",
+      ref: "Doctor",
       required: true,
     },
     status: {

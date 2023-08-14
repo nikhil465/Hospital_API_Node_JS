@@ -5,6 +5,7 @@ const env = require("./environment");
 
 const Doctor = require("../models/doctor");
 
+//For JWT Options
 let options = {
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
   secretOrKey: env.jwt_secret,
@@ -12,15 +13,19 @@ let options = {
 
 passport.use(
   new JWTStrategy(options, function (jwtPayload, done) {
-    Doctor.findOne(jwtPayload._id)
+    //Finding Doctor
+    Doctor.findById(jwtPayload._id)
       .catch((err) => {
+        //If error in finding Doctor
         console.log("Error in finding the doctor : ", err);
         return;
       })
       .then((doctor) => {
+        //If found Doctor
         if (doctor) {
           return done(null, doctor);
         } else {
+          //else didn't find
           return done(null, false);
         }
       });
