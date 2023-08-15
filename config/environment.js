@@ -13,7 +13,7 @@ const accessLogStream = rfs.createStream("access.log", {
 const development = {
   name: "development",
   db: "hospital_development",
-  jwt_secret: "codial",
+  jwt_secret: "hospital",
   morgan: {
     mode: "dev",
     options: {
@@ -24,8 +24,8 @@ const development = {
 
 const production = {
   name: "production",
-  db: process.env.CODIAL_DB,
-  jwt_secret: process.env.CODIAL_JWT_SECRET,
+  db: process.env.HOSPITAL_DB,
+  jwt_secret: process.env.HOSPITAL_JWT_SECRET,
   morgan: {
     mode: "combined",
     options: {
@@ -35,7 +35,7 @@ const production = {
 };
 
 module.exports =
-  eval(process.env.CODIAL_ENVIRONMENT) == undefined
+  eval(process.env.HOSPITAL_ENVIRONMENT) == undefined
     ? development
-    : eval(process.env.CODIAL_ENVIRONMENT);
+    : eval(process.env.HOSPITAL_ENVIRONMENT);
 // module.exports = development;
