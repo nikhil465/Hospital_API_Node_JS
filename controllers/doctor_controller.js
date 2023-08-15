@@ -6,7 +6,7 @@ const env = require("../config/environment");
 module.exports.register = async function (req, res) {
   try {
     //Find the doctor in DB
-    let = await Patient.findOne({ username: req.body.username }).select(
+    let doctor = await Doctor.findOne({ username: req.body.username }).select(
       "-_id -createdAt -updatedAt -__v"
     );
 
