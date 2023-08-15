@@ -7,7 +7,7 @@ module.exports.register = async function (req, res) {
   try {
     //Find the doctor in DB
     let doctor = await Doctor.findOne({ username: req.body.username }).select(
-      "-_id -createdAt -updatedAt -__v"
+      "-_id -createdAt -updatedAt -__v -password"
     );
 
     if (doctor) {
