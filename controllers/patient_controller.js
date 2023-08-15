@@ -6,7 +6,7 @@ module.exports.register = async function (req, res) {
   try {
     let patient = await Patient.find({
       phone: req.body.phone,
-    }).select("-_id -createdAt -updatedAt -__v");
+    }).select("-createdAt -updatedAt -__v");
 
     if (patient.length !== 0) {
       return res.status(409).json({
