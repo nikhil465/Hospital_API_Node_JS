@@ -5,13 +5,23 @@ const env = require("../config/environment");
 //Register Doctor
 module.exports.register = async function (req, res) {
   try {
-    //console.log(req);
     //Find the doctor in DB
-    let doctor = await Doctor.create({
+    let = await Patient.findOne({ username: req.body.username }).select(
+      "-_id -createdAt -updatedAt -__v"
+    );
+
+    if (doctor) {
+      return res.status(409).json({
+        messsage: "Doctor is already exists",
+        data: doctor,
+      });
+    }
+
+    //Create Doctor
+    await Doctor.create({
       username: req.body.username,
       password: req.body.password,
     });
-
     //return status for success of inserting
     return res.status(200).json({
       message: "Doctor Registered Successfully",
