@@ -59,3 +59,20 @@ module.exports.login = async function (req, res) {
     });
   }
 };
+
+module.exports.deleteAll = async function (req, res) {
+  try {
+    let doctor = await Doctor.deleteMany();
+
+    return res.status(200).json({
+      message: "Deleted Successfully",
+      data: doctor,
+    });
+  } catch (error) {
+    console.log("Error in login doctor : ", error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
