@@ -18,13 +18,16 @@ module.exports.register = async function (req, res) {
     }
 
     //Create Doctor
-    await Doctor.create({
+    let newDoctor = await Doctor.create({
       username: req.body.username,
       password: req.body.password,
     });
     //return status for success of inserting
     return res.status(200).json({
       message: "Doctor Registered Successfully",
+      data: {
+        id: newDoctor._id,
+      },
     });
   } catch (error) {
     //if anything error happens at creating

@@ -15,13 +15,16 @@ module.exports.register = async function (req, res) {
       });
     }
 
-    await Patient.create({
+    let newPatient = await Patient.create({
       name: req.body.name,
       phone: req.body.phone,
     });
 
     return res.status(200).json({
       message: "Patient Registered Successfully",
+      data: {
+        id: newPatient._id,
+      },
     });
   } catch (error) {
     console.log("Error in registering Patient : ", error);
